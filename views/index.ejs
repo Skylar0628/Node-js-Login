@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>留言板</h1>
+  <% if(!userID) {%>
+    <p>你尚未登入，所以無法瀏覽，若要留言請先登入</p>
+  <% }%>
+  <%  if(userID) { %>
+    <form action="/messageBoard" method="post">
+      <input type="text" name="content" placeholder="填寫留言訊息">
+      <input type="submit" valut="送出"> 
+     <%=errors %>
+    </form>
+  <% }%>
+ 
+  <a href="/login">登入</a>
+  <a href="/signup">註冊</a>
+  <% if(userID) {%>
+    <a href="/users">個人頁面</a>
+  <%}%>
+  <ul>
+    <% for (const item in list){ %>
+        <li><%- list[item].nickname%>:<%- list[item].content%></li>
+    <% } %>
+  </ul>
+</body>
+
+</html>
